@@ -1,0 +1,85 @@
+﻿@model ContractMonthlyClaimSyt.Models.HrDashboardViewModel
+@{
+    ViewData["Title"] = "HR Dashboard";
+}
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-warning">Approved Claims – Ready for Payment</div>
+            <div class="card-body p-0">
+                <table class="table table-striped table-sm mb-0 align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Claim #</th>
+                            <th>Lecturer</th>
+                            <th>Period</th>
+                            <th>Amount</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.ApprovedClaims.Any())
+                        {
+                            foreach (var c in Model.ApprovedClaims)
+                            {
+                                <tr>
+                                    <td>@c.ClaimNumber</td>
+                                    <td>@c.LecturerName</td>
+                                    <td>@c.Month/@c.Year</td>
+                                    <td>@c.Amount.ToString("C")</td>
+                                    <td class="text-end">
+                                        <form asp-action="MarkInvoiced" method="post">
+                                            <input type="hidden" name="id" value="@c.Id" />
+                                            <button type="submit" class="btn btn-sm btn-primary">Mark Invoiced</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="5" class="text-center text-muted">No approved claims.</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-secondary text-white">Invoiced / Completed Claims</div>
+            <div class="card-body p-0">
+                <table class="table table-striped table-sm mb-0 align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Claim #</th>
+                            <th>Lecturer</th>
+                            <th>Period</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.InvoicedClaims.Any())
+                        {
+                            foreach (var c in Model.InvoicedClaims)
+                            {
+                                <tr>
+                                    <td>@c.ClaimNumber</td>
+                                    <td>@c.LecturerName</td>
+                                    <td>@c.Month/@c.Year</td>
+                                    <td>@c.Amount.ToString("C")</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="4" class="text-center text-muted">No invoiced claims yet.</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

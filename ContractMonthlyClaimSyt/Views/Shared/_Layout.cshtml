@@ -1,0 +1,84 @@
+﻿@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Contract Monthly Claim System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg main-navbar shadow-sm">
+            <div class="container">
+                <a class="navbar-brand fw-semibold d-flex align-items-center" asp-controller="Home" asp-action="Index">
+                    <span class="brand-badge me-2">CMS</span>
+                    <span>Contract Claim System</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                        aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link @(currentController == "Home" ? "active-nav" : "")"
+                               asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link @(currentController == "Claims" && currentAction == "Lecturer" ? "active-nav" : "")"
+                               asp-controller="Claims" asp-action="Lecturer">Lecturer</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link @(currentController == "Claims" && currentAction == "Coordinator" ? "active-nav" : "")"
+                               asp-controller="Claims" asp-action="Coordinator">Coordinator</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link @(currentController == "Claims" && currentAction == "Manager" ? "active-nav" : "")"
+                               asp-controller="Claims" asp-action="Manager">Manager</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link @(currentController == "Claims" && currentAction == "Hr" ? "active-nav" : "")"
+                               asp-controller="Claims" asp-action="Hr">HR</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link @(currentController == "Claims" && currentAction == "MyClaims" ? "active-nav" : "")"
+                               asp-controller="Claims" asp-action="MyClaims">My Claims</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="top-gradient-bar"></div>
+    </header>
+
+    <div class="page-background">
+        <main class="container py-4">
+            @RenderBody()
+        </main>
+
+        <footer class="border-top footer text-muted mt-4">
+            <div class="container d-flex justify-content-between align-items-center flex-wrap">
+                <span>© @DateTime.Now.Year – Contract Monthly Claim System</span>
+                <span class="small text-secondary">DIS2 PROG6212 – Automation of Web Application</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

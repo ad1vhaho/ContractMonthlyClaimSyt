@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Contract Monthly Claim System";
+}
+
+<div class="text-center mb-4">
+    <h1 class="display-5 fw-bold">Contract Monthly Claim System</h1>
+    <p class="lead">
+        Capture, verify, approve and invoice contract lecturer claims.
+    </p>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Lecturer</h5>
+                <p class="card-text flex-grow-1">Submit a new monthly claim with hours and hourly rate.</p>
+                <a asp-controller="Claims" asp-action="Lecturer" class="btn btn-primary mt-auto">Open Lecturer View</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Programme Coordinator</h5>
+                <p class="card-text flex-grow-1">Verify claims and move them from Pending to Verified or Rejected.</p>
+                <a asp-controller="Claims" asp-action="Coordinator" class="btn btn-info mt-auto">Open Coordinator View</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Academic Manager & HR</h5>
+                <p class="card-text flex-grow-1">Approve verified claims and generate payment lists for HR.</p>
+                <a asp-controller="Claims" asp-action="Manager" class="btn btn-success mt-auto me-2">Manager View</a>
+                <a asp-controller="Claims" asp-action="Hr" class="btn btn-warning mt-2">HR View</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,289 @@
+/* --- Base theme colours --- */
+:root {
+    --bg-page: #f3f4f6;
+    --bg-card: #ffffff;
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-soft: #e0edff;
+    --accent: #f97316; 
+    --nav-bg: #020617; 
+    --nav-link: #e5e7eb;
+    --nav-link-muted: #9ca3af;
+    --nav-active-bg: #0f172a;
+    --nav-active-text: #ffffff;
+    --border-soft: #e5e7eb;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+}
+
+/* --- Global --- */
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-page);
+    margin: 0;
+}
+
+.page-background {
+    min-height: calc(100vh - 56px);
+}
+
+/* --- Navbar --- */
+.main-navbar {
+    background: linear-gradient(90deg, #020617 0%, #111827 40%, #1e293b 100%);
+}
+
+    .main-navbar .navbar-brand {
+        color: #f9fafb;
+    }
+
+        .main-navbar .navbar-brand:hover {
+            color: #ffffff;
+        }
+
+    .main-navbar .nav-link {
+        color: var(--nav-link-muted);
+        font-weight: 500;
+        margin-left: .5rem;
+        padding-inline: .9rem;
+        border-radius: 999px;
+        transition: background-color .2s ease, color .2s ease, transform .15s ease;
+    }
+
+        .main-navbar .nav-link:hover {
+            color: var(--nav-link);
+            background-color: rgba(148, 163, 184, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .main-navbar .nav-link.active-nav {
+            color: var(--nav-active-text);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            box-shadow: 0 4px 12px rgba(37, 99, 235, .45);
+        }
+
+
+.navbar-toggler {
+    border-color: rgba(148, 163, 184, 0.6);
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+.brand-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    font-size: .75rem;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.7);
+}
+
+.top-gradient-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), #22c55e, var(--accent));
+}
+
+.page-title {
+    font-size: 1.75rem;
+    font-weight: 650;
+    letter-spacing: .02em;
+    margin-bottom: .5rem;
+}
+
+.page-subtitle {
+    color: black;
+    font-size: .95rem;
+}
+
+/* --- Cards / panels --- */
+.card,
+.claim-card {
+    border-radius: 18px;
+    border: 1px solid var(--border-soft);
+    background-color: var(--bg-card);
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.05), 0 1px 0 rgba(148, 163, 184, 0.3);
+}
+
+.card-header {
+    border-bottom: 1px solid var(--border-soft);
+    background: linear-gradient(135deg, var(--primary-soft), #eff6ff);
+    border-radius: 18px 18px 0 0;
+    font-weight: 600;
+}
+
+.dashboard-section {
+    margin-bottom: 1.75rem;
+}
+
+/* A soft pill used for little labels like “Pending”, etc. */
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: .15rem .7rem;
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 600;
+}
+
+.status-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-verified {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-approved {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.status-rejected {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* --- Buttons --- */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    border-radius: 999px;
+    padding-inline: 1.4rem;
+    padding-block: .55rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    box-shadow: 0 12px 30px rgba(37, 99, 235, .45);
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+        filter: brightness(1.05);
+        transform: translateY(-1px);
+        box-shadow: 0 16px 40px rgba(37, 99, 235, .6);
+    }
+
+.btn-outline-primary {
+    border-radius: 999px;
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+    .btn-outline-primary:hover {
+        background: var(--primary-soft);
+        color: var(--primary-dark);
+    }
+
+.btn-danger {
+    border-radius: 999px;
+}
+
+/* Buttons for small filter/switch actions */
+.btn-chip {
+    border-radius: 999px;
+    padding: .3rem .85rem;
+    font-size: .8rem;
+}
+
+/* --- Forms --- */
+.form-control,
+.form-select {
+    border-radius: 12px;
+    border-color: var(--border-soft);
+    padding-block: .5rem;
+}
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 .2rem rgba(37, 99, 235, .18);
+    }
+
+/* --- Tables --- */
+.table {
+    border-radius: 14px;
+    overflow: hidden;
+    background-color: var(--bg-card);
+}
+
+    .table thead {
+        background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    }
+
+        .table thead th {
+            border-bottom: none;
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+    .table tbody tr {
+        vertical-align: middle;
+    }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        .table tbody tr:hover {
+            background-color: #e5f0ff;
+        }
+
+/* --- Alerts / message bar --- */
+.alert-info {
+    border-radius: 14px;
+    border-color: #bfdbfe;
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+/* --- Footer --- */
+footer.footer {
+    background-color: #0b1120;
+    color: #9ca3af;
+    padding-block: 1rem;
+}
+
+    footer.footer a {
+        color: #e5e7eb;
+    }
+
+/* --- Utility spacing tweaks --- */
+.section-heading {
+    margin-bottom: .75rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+    .section-heading .title {
+        font-weight: 600;
+    }
+
+    .section-heading .hint {
+        font-size: .8rem;
+        color: var(--text-muted);
+    }
+
+/* On very small screens, give a bit more breathing space */
+@media (max-width: 576px) {
+    .page-title {
+        font-size: 1.4rem;
+    }
+
+    .card,
+    .claim-card {
+        border-radius: 16px;
+    }
+}

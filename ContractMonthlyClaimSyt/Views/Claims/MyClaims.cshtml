@@ -1,0 +1,44 @@
+﻿@model List<ContractMonthlyClaimSyt.Models.Claim>
+@{
+    ViewData["Title"] = "All Claims";
+}
+
+<div class="card shadow-sm">
+    <div class="card-header bg-dark text-white">All Claims (Audit View)</div>
+    <div class="card-body p-0">
+        <table class="table table-striped table-sm mb-0 align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Lecturer</th>
+                    <th>Period</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Submitted</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    foreach (var c in Model)
+                    {
+                        <tr>
+                            <td>@c.ClaimNumber</td>
+                            <td>@c.LecturerName</td>
+                            <td>@c.Month/@c.Year</td>
+                            <td>@c.Amount.ToString("C")</td>
+                            <td>@c.Status</td>
+                            <td>@c.SubmittedOn.ToString("yyyy-MM-dd HH:mm")</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">No claims captured yet.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

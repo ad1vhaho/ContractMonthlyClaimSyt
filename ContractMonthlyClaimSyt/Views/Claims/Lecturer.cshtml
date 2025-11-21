@@ -1,0 +1,127 @@
+﻿@model ContractMonthlyClaimSyt.Models.LecturerDashboardViewModel
+@{
+    ViewData["Title"] = "Lecturer Dashboard";
+}
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">Submit New Claim</div>
+            <div class="card-body">
+                <form asp-action="SubmitLecturerClaim" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="NewClaim.LecturerName" class="form-label"></label>
+                        <input asp-for="NewClaim.LecturerName" class="form-control" />
+                        <span asp-validation-for="NewClaim.LecturerName" class="text-danger"></span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label asp-for="NewClaim.Month" class="form-label"></label>
+                            <input asp-for="NewClaim.Month" class="form-control" />
+                            <span asp-validation-for="NewClaim.Month" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label asp-for="NewClaim.Year" class="form-label"></label>
+                            <input asp-for="NewClaim.Year" class="form-control" />
+                            <span asp-validation-for="NewClaim.Year" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="NewClaim.ModuleName" class="form-label"></label>
+                        <input asp-for="NewClaim.ModuleName" class="form-control" />
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label asp-for="NewClaim.HoursWorked" class="form-label"></label>
+                            <input asp-for="NewClaim.HoursWorked" class="form-control" id="hoursInput" />
+                            <span asp-validation-for="NewClaim.HoursWorked" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label asp-for="NewClaim.HourlyRate" class="form-label"></label>
+                            <input asp-for="NewClaim.HourlyRate" class="form-control" id="rateInput" />
+                            <span asp-validation-for="NewClaim.HourlyRate" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Total Amount (R)</label>
+                        <input type="text" class="form-control" id="amountDisplay" readonly />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Supporting Documents</label>
+                        <input type="file" name="attachments" multiple class="form-control" />
+                        <div class="form-text">File names are stored in an in-memory list for this POE.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="NewClaim.AdditionalNotes" class="form-label"></label>
+                        <textarea asp-for="NewClaim.AdditionalNotes" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Submit Claim</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-secondary text-white">Track My Claims</div>
+            <div class="card-body p-0">
+                <table class="table table-sm mb-0 table-striped align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Claim #</th>
+                            <th>Period</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.MyClaims.Any())
+                        {
+                            foreach (var c in Model.MyClaims)
+                            {
+                                <tr>
+                                    <td>@c.ClaimNumber</td>
+                                    <td>@c.Month/@c.Year</td>
+                                    <td>@c.Amount.ToString("C")</td>
+                                    <td>@c.Status</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4" class="text-center text-muted">
+                                    No claims have been captured yet.
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function recalc() {
+            const h = parseFloat(document.getElementById('hoursInput').value) || 0;
+            const r = parseFloat(document.getElementById('rateInput').value) || 0;
+            const total = h * r;
+            document.getElementById('amountDisplay').value = total.toFixed(2);
+        }
+        document.getElementById('hoursInput').addEventListener('input', recalc);
+        document.getElementById('rateInput').addEventListener('input', recalc);
+        recalc();
+    </script>
+}
